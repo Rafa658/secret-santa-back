@@ -39,12 +39,17 @@ app.get('/get_people', async (_, res) => {
     res.status(200)
 })
 
-app.get('/draw', async (req, res) => {
-    var people = await PersonService.GetAll()
-    var draw = generateDraw(people)
-
-    res.send(draw)
-    res.status(200)
+app.get('/draw', async (_, res) => {
+    try {
+        var people = await PersonService.GetAll()
+        var draw = generateDraw(people)
+    
+        res.send(draw)
+        res.status(200) 
+    } catch (error) {
+        res.send(error)
+        res.status(400)
+    }
 })
 
 app.post('/add_person', async (req, res) => {
