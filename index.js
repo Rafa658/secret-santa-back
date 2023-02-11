@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const connectToDatabase = require('./database')
+const generateDraw = require('./utilities/generateDraw')
 const port = 4000
 
 const PersonService = require('./services/PersonService')
@@ -35,6 +36,14 @@ app.get('/get_people', async (_, res) => {
 
     var results = await PersonService.GetAll()
     res.send(results)
+    res.status(200)
+})
+
+app.get('/draw', async (req, res) => {
+    var people = await PersonService.GetAll()
+    var draw = generateDraw(people)
+
+    res.send(draw)
     res.status(200)
 })
 
