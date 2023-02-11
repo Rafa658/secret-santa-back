@@ -42,7 +42,7 @@ app.get('/get_people', async (_, res) => {
 app.get('/draw', async (_, res) => {
     try {
         var people = await PersonService.GetAll()
-        var draw = generateDraw(people)
+        var draw = await generateDraw(people)
     
         res.send(draw)
         res.status(200) 
