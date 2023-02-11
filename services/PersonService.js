@@ -37,11 +37,11 @@ class PersonService {
         }
     }
 
-    async asyncUpdate(body) {
-        if (body.name_upd && body.email_upd) return false
-
-        const filter = {"name": body.name, "email": body.email}
-        const update = {"name": body.name_upd, "email": body.email_upd}
+    async Update(name, email, name_upd, email_upd) {
+        if (!name_upd || !email_upd) return false
+        
+        const filter = {"name": name, "email": email}
+        const update = {"name": name_upd, "email": email_upd}
 
         await Person.findOneAndUpdate(filter, update, {new: true})
         return true

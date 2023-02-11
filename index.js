@@ -41,11 +41,11 @@ app.get('/get_people', async (_, res) => {
 app.post('/add_person', async (req, res) => {
     var body = req.body
 
-    var status = PersonService.Add(body.name, body.email)
+    var stat = await PersonService.Add(body.name, body.email)
 
-    if (status) {
+    if (stat) {
         res.status(200)
-        res.send('Ok')
+        res.send(`Added ${body.name} ${body.email}`)
     } else {
         res.status(400)
         res.send('Error')
@@ -55,9 +55,9 @@ app.post('/add_person', async (req, res) => {
 app.delete('/delete_person', async (req, res) => {
     var body = req.body
 
-    var status = PersonService.DeleteByName(body.name)
+    var stat = await PersonService.DeleteByName(body.name)
 
-    if (status) {
+    if (stat) {
         res.status(200)
         res.send(`Deleted ${body.name}`)
     } else {
@@ -69,12 +69,11 @@ app.delete('/delete_person', async (req, res) => {
 app.patch('/update_person', async (req, res) => {
     var body = req.body
 
-    var status = PersonService.Update(body)
+    var stat = await PersonService.Update(body.name, body.email, body.name_upd, body.email_upd)
 
-    if (status) {
+    if (stat) {
         res.status(200)
-        if (body.name_upd) res.send(`Changed name to ${body.name_upd}`)
-        if (body.email_upd) res.send(`Changed email to ${body.email_upd}`)
+        res.send(`Updated ${body.name_upd} ${body.email_upd}`)
     } else {
         res.status(400)
         res.send('Error')
