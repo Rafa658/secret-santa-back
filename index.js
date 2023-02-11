@@ -47,3 +47,17 @@ app.post('/add_person', async (req, res) => {
         res.send('Error')
     }
 })
+
+app.delete('/delete_person', async (req, res) => {
+    var body = req.body
+
+    var status = PersonService.DeleteByName(body.name)
+
+    if (status) {
+        res.status(200)
+        res.send(`Deleted ${body.name}`)
+    } else {
+        res.status(400)
+        res.send('Error')
+    }
+})

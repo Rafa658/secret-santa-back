@@ -25,6 +25,17 @@ class PersonService {
             return false
         }
     }
+
+    async DeleteByName(name) {
+        if (!name) return false
+
+        try {
+            await Person.deleteOne({name})
+            return true
+        } catch (error) {
+            return false
+        }
+    }
 }
 
 module.exports = new PersonService()
