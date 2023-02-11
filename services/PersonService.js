@@ -3,7 +3,7 @@ const person = require('../models/Person')
 
 const Person = mongoose.model('Person', person)
 
-class PersonSerice {
+class PersonService {
     async Add(name, gender, pref) {
         if (!name || !gender || !pref) return false
 
@@ -17,3 +17,5 @@ class PersonSerice {
         }
     }
 }
+
+module.exports = new PersonService()
