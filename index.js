@@ -5,6 +5,8 @@ const connectToDatabase = require('./database')
 const res = require('express/lib/response')
 const port = 4000
 
+const PersonService = require('./services/PersonService')
+
 // basic configs for better running
 const app = express()
 app.use(cors({
@@ -28,4 +30,18 @@ app.get('/', (req, res) => res.send("Running"))
 
 app.get('/get_person', async (req, res) => {
     
+})
+
+app.post('/add_person', async (req, res) => {
+    var body = req.body
+
+    var status = PersonService.Add(body.name, body.gender, body.pref)
+
+    if (status) {
+        res.status(200)
+        res.send('Ok')
+    } else {
+        res.status(400)
+        res.send('Error')
+    }
 })
