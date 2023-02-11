@@ -13,10 +13,10 @@ class PersonService {
         }
     }
 
-    async Add(name, gender, pref) {
-        if (!name || !gender || !pref) return false
+    async Add(name, email) {
+        if (!name || !email ) return false
 
-        var newPerson = new Person ({name, gender, pref})
+        var newPerson = new Person ({name, email})
 
         try {
             await newPerson.save()

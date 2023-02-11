@@ -26,9 +26,9 @@ app.use(function (req, res, next) {
 
 connectToDatabase()
 
-app.get('/', (req, res) => res.send("Running"))
+app.get('/', (_, res) => res.send("Running"))
 
-app.get('/get_people', async (req, res) => {
+app.get('/get_people', async (_, res) => {
 
     var results = await PersonService.GetAll()
     res.send(results)
@@ -38,7 +38,7 @@ app.get('/get_people', async (req, res) => {
 app.post('/add_person', async (req, res) => {
     var body = req.body
 
-    var status = PersonService.Add(body.name, body.gender, body.pref)
+    var status = PersonService.Add(body.name, body.email)
 
     if (status) {
         res.status(200)
