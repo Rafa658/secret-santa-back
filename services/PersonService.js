@@ -4,6 +4,15 @@ const person = require('../models/Person')
 const Person = mongoose.model('Person', person)
 
 class PersonService {
+    async GetAll() {
+        try {
+            var result = await Person.find()
+            return result
+        } catch (error) {
+            return []
+        }
+    }
+
     async Add(name, gender, pref) {
         if (!name || !gender || !pref) return false
 

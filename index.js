@@ -28,8 +28,11 @@ connectToDatabase()
 
 app.get('/', (req, res) => res.send("Running"))
 
-app.get('/get_person', async (req, res) => {
-    
+app.get('/get_people', async (req, res) => {
+
+    var results = await PersonService.GetAll()
+    res.send(results)
+    res.status(200)
 })
 
 app.post('/add_person', async (req, res) => {
