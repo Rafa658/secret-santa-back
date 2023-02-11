@@ -16,7 +16,10 @@ class PersonService {
     async Add(name, email) {
         if (!name || !email ) return false
 
-        if (Person.find({"name": name}) || Person.find({"email": email})) return false
+        let find_name = await Person.find({"name": name})
+        let find_email = await Person.find({"email": email})
+
+        if (find_name.len != 0 || find_email.len != 0) return false
 
         var newPerson = new Person ({name, email})
 
