@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const connectToDatabase = require('./database')
 const generateDraw = require('./utilities/generateDraw')
 const port = 4000
+const sendMail = require('./utilities/sendMail')
 
 const PersonService = require('./services/PersonService')
 
@@ -43,6 +44,8 @@ app.get('/draw', async (_, res) => {
     try {
         var people = await PersonService.GetAll()
         var draw = await generateDraw(people)
+
+        sendMail(draw)
     
         res.send(draw)
         res.status(200) 
