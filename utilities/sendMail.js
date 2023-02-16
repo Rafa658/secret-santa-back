@@ -10,8 +10,7 @@ function sendMail(draw) {
         }
 
         console.log('Credentials obtained, sending message...');
-        console.log(draw)
-
+        
         // Create a SMTP transporter object
         const transporter = nodemailer.createTransport({
             host: 'smtp.ethereal.email',
